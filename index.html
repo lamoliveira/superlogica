@@ -1,0 +1,402 @@
+<!DOCTYPE HTML>
+<!--
+	Future Imperfect by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>Superlógica</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+
+
+
+
+
+	<script type="text/javascript" src="https://demo.tableau.com/javascripts/api/tableau-2.9.1.min.js"></script>
+
+	<script type="text/javascript">
+
+		window.addEventListener("load", mediaSizer);
+
+
+		var vizList = [
+
+			"https://demo.tableau.com/t/LuizOliveira/views/resultado_16808117838800/AcompanhamentodeResultado",
+			"https://demo.tableau.com/t/LuizOliveira/views/HUMANRESOURCES-HRExpensesDashboardBrasil_16808117838800/Cockpit",
+			"https://demo.tableau.com/t/LuizOliveira/views/PrevistoxRealizado_16808117834950/AnliseMensal/60b53539-39cc-4fee-a2ee-74f01e86b04b/e60c3f27-91bc-4e4a-a4f6-15ececd7b15a",
+			"https://public.tableau.com/views/Howhastheworldchangedsince1962/WorldIndicators?:language=en-US&:display_count=n&:origin=viz_share_link",
+			"https://demo.tableau.com/t/LuizOliveira/views/PROCUREMENT-ContractManagementDashboard_16790725723870/Home",
+			"https://public.tableau.com/views/SURVEY-LikertScaleDashboard/LikertScale?:embed=y&:display_count=n&:origin=viz_share_link",
+			"https://public.tableau.com/views/GoogleAdsDashboard/Home?:language=en-US&:toolbar=n&:display_count=n&:origin=viz_share_link",
+			"https://public.tableau.com/views/TwitterAdsDashboard/Home?:language=en-US&:toolbar=n&:display_count=n&:origin=viz_share_link",
+			"https://public.tableau.com/views/NPS-NetPromoterScoreDashboard/Home?:language=en-US&:display_count=n&:origin=viz_share_link",
+			"https://demo.tableau.com/t/LuizOliveira/views/1-XX-DesigningEffectiveDashboards_16609286511730/Intro"
+
+		];
+		// Array of Tableau Server URLs for dashboard or sheet navigation.
+
+		var viz,
+			vizLen = vizList.length,
+			vizCount = 0,
+			devType,
+			vHideTabs = true,
+			vHeight = 800;
+		vWidth = 415;
+		vHideToolbar = true;
+		var options = {
+			device: devType,
+		};
+
+
+		function mediaSizer() {
+			// Determines the correct viz layout according to screen sizes.
+			if (window.matchMedia("(max-width: 480px)").matches) {
+				//alert("I am a phone layout!");
+				devType = 'phone';
+				vWidth = 415;
+				vHeight = 2000;
+				//options.device = 'phone';
+			} else if (window.matchMedia("(max-width: 980px)").matches) {
+				//alert("I am a tablet layout!");
+				devType = 'tablet';
+				vWidth = 980;
+				//options.device = 'tablet';
+			} else {
+				//alert("I am a desktop layout!");
+				devType = 'desktop';
+				vWidth = 1500;
+				vHeight = 900;
+				//options.device = 'desktop';
+			}
+			console.log("devtype: " + devType)
+			console.log("launch0")
+			launchViz(0);
+
+			launchViz(1);
+			 launchViz(2);
+			// launchViz(3);
+
+
+			// vHideTabs= false;
+			// console.log("launch1")
+			// if (devType === 'desktop')  {
+			//     vHeight = 900;}
+			//     else if (devType === 'phone')
+			//     {vHeight = 1500;}
+			//     else {vHeight = 1600;}    
+			//  launchViz(4);
+			//  console.log("launch2")
+			//  if (devType === 'desktop')  {
+			//     vHeight = 900;}
+			//     else if (devType === 'phone')
+			//     {vHeight = 3450;}
+			//     else {vHeight = 1600;}   
+			// // launchViz(5);
+			//  launchViz(6);
+			//  launchViz(7);
+			// launchViz(8);
+			// launchViz(9);
+			// launchViz(10);
+
+
+
+
+
+			// Launches the viz again with the new sizing at the current index of vizList.
+		}
+
+
+		function launchViz(vizNav) {
+			// JS object targeting a div in the html document. (vizNav) will pass navigation values to move back and forth across vizList.
+			console.log("vizContainer" + vizNav)
+			console.log("devtype: " + devType)
+			var vizDiv = document.getElementById("vizContainer" + vizNav),
+				// Will embed the visualization on a div with id="VizContainer"
+				options = {
+					device: devType,
+					width: vWidth,
+					height: vHeight,
+					hideTabs: vHideTabs,
+					hideToolbar: vHideToolbar,
+					onFirstInteractive: function () {
+						listenToMarksSelection();
+					}
+				};
+
+
+			var vizURL = vizList[vizNav];
+			// Dynamic URL returning the string from vizList at index = vizNav (viz to be displayed).
+
+			try {
+				// Initializes the viz from the array with desired options. 
+				viz = new tableau.Viz(vizDiv, vizURL, options);
+				if (!viz) throw 'viz not initialized'
+			}
+			catch (err) {
+				alert(err);
+			}
+			finally {
+				console.log('whatever')
+				console.count('initViz')
+			}
+
+		}
+
+	</script>
+
+
+
+
+</head>
+
+<body class="single is-preload">
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Header -->
+		<header id="header">
+			<div>
+				<img src="images/superlogica.JPG"
+					srcset="images/superlogica.JPG?interpolation=lanczos-none&amp;resize=80:* 2x, images/superlogica.JPG?interpolation=lanczos-none&amp;resize=80:* 2x"
+					alt="Superlógica">
+			</div>
+			<h1><a href="index.html">Home</a></h1>
+			<nav class="links">
+				<ul>
+					<li><a href="#">Softwares</a></li>
+					<li><a href="#">Serviços Financeiros</a></li>
+					<li><a href="#">Eventos</a></li>
+					<li><a href="#">Institucional</a></li>
+					<li><a href="#">Grupo</a></li>
+				</ul>
+			</nav>
+			<nav class="main">
+				<ul>
+					<li class="search">
+						<a class="fa-search" href="#search">Search</a>
+						<form id="search" method="get" action="#">
+							<input type="text" name="query" placeholder="Search" />
+						</form>
+					</li>
+					<li class="menu">
+						<a class="fa-bars" href="#menu">Menu</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+
+		<!-- Menu -->
+		<section id="menu">
+
+			<!-- Search -->
+			<section>
+				<form class="search" method="get" action="#">
+					<input type="text" name="query" placeholder="Search" />
+				</form>
+			</section>
+
+			<!-- Links -->
+			<section>
+				<ul class="links">
+					<li>
+						<a href="#">
+							<h3>Lorem ipsum</h3>
+							<p>Feugiat tempus veroeros dolor</p>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<h3>Dolor sit amet</h3>
+							<p>Sed vitae justo condimentum</p>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<h3>Feugiat veroeros</h3>
+							<p>Phasellus sed ultricies mi congue</p>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<h3>Etiam sed consequat</h3>
+							<p>Porta lectus amet ultricies</p>
+						</a>
+					</li>
+				</ul>
+			</section>
+
+			<!-- Actions -->
+			<section>
+				<ul class="actions stacked">
+					<li><a href="#" class="button large fit">Log In</a></li>
+				</ul>
+			</section>
+
+		</section>
+
+		<!-- Main -->
+		<div id="main">
+
+			<!-- Post -->
+			<article class="post">
+				<header>
+					<div class="title">
+						<h2><a href="#">Superlógica</a></h2>
+						<p>A plataforma parceira das administradoras de condomínios e imobiliárias</p>
+					</div>
+					<div class="meta">
+						<time class="published" datetime="2016-11-01">April 6, 2023</time>
+						<a href="#" class="author"><span class="name">LUIZ OLIVEIRA</span><img src="images/LUIZ.jpeg"
+								alt="" /></a>
+					</div>
+				</header>
+				<!--<span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
+								-->
+
+				<div style="text-align: center;">
+					<div style="display: inline-block;">
+
+						<div id="vizContainer0"></div>
+					</div>
+				</div>
+
+
+				<p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod
+					placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non
+					congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta
+					lectus vitae, ultricies congue gravida diam non fringilla.</p>
+				<p>Nunc quis dui scelerisque, scelerisque urna ut, dapibus orci. Sed vitae condimentum lectus, ut
+					imperdiet quam. Maecenas in justo ut nulla aliquam sodales vel at ligula. Sed blandit diam odio, sed
+					fringilla lectus molestie sit amet. Praesent eu tortor viverra lorem mattis pulvinar feugiat in
+					turpis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+					Fusce ullamcorper tellus sit amet mattis dignissim. Phasellus ut metus ligula. Curabitur nec leo
+					turpis. Ut gravida purus quis erat pretium, sed pellentesque massa elementum. Fusce vestibulum porta
+					augue, at mattis justo. Integer sed sapien fringilla, dapibus risus id, faucibus ante. Pellentesque
+					mattis nunc sit amet tortor pellentesque, non placerat neque viverra. </p>
+				<footer>
+					<ul class="stats">
+						<li><a href="#">General</a></li>
+						<li><a href="#" class="icon solid fa-heart">28</a></li>
+						<li><a href="#" class="icon solid fa-comment">128</a></li>
+					</ul>
+				</footer>
+			</article>
+
+
+			<!-- Post -->
+			<article class="post">
+				<header>
+					<div class="title">
+						<h2><a href="#">Superlógica</a></h2>
+						<p>A plataforma parceira das administradoras de condomínios e imobiliárias</p>
+					</div>
+					<div class="meta">
+						<time class="published" datetime="2016-11-01">April 6, 2023</time>
+						<a href="#" class="author"><span class="name">LUIZ OLIVEIRA</span><img src="images/LUIZ.jpeg"
+								alt="" /></a>
+					</div>
+				</header>
+				<!--<span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
+								-->
+
+				<div id="vizContainer1"></div>
+
+
+
+
+				<p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod
+					placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non
+					congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta
+					lectus vitae, ultricies congue gravida diam non fringilla.</p>
+				<p>Nunc quis dui scelerisque, scelerisque urna ut, dapibus orci. Sed vitae condimentum lectus, ut
+					imperdiet quam. Maecenas in justo ut nulla aliquam sodales vel at ligula. Sed blandit diam odio, sed
+					fringilla lectus molestie sit amet. Praesent eu tortor viverra lorem mattis pulvinar feugiat in
+					turpis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+					Fusce ullamcorper tellus sit amet mattis dignissim. Phasellus ut metus ligula. Curabitur nec leo
+					turpis. Ut gravida purus quis erat pretium, sed pellentesque massa elementum. Fusce vestibulum porta
+					augue, at mattis justo. Integer sed sapien fringilla, dapibus risus id, faucibus ante. Pellentesque
+					mattis nunc sit amet tortor pellentesque, non placerat neque viverra. </p>
+				<footer>
+					<ul class="stats">
+						<li><a href="#">General</a></li>
+						<li><a href="#" class="icon solid fa-heart">28</a></li>
+						<li><a href="#" class="icon solid fa-comment">128</a></li>
+					</ul>
+				</footer>
+			</article>
+		</div>
+
+
+		
+			<!-- Post -->
+			<article class="post">
+				<header>
+					<div class="title">
+						<h2><a href="#">Superlógica</a></h2>
+						<p>A plataforma parceira das administradoras de condomínios e imobiliárias</p>
+					</div>
+					<div class="meta">
+						<time class="published" datetime="2016-11-01">April 6, 2023</time>
+						<a href="#" class="author"><span class="name">LUIZ OLIVEIRA</span><img src="images/LUIZ.jpeg"
+								alt="" /></a>
+					</div>
+				</header>
+				<!--<span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
+								-->
+
+				<div id="vizContainer2"></div>
+
+
+
+
+				<p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod
+					placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non
+					congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta
+					lectus vitae, ultricies congue gravida diam non fringilla.</p>
+				<p>Nunc quis dui scelerisque, scelerisque urna ut, dapibus orci. Sed vitae condimentum lectus, ut
+					imperdiet quam. Maecenas in justo ut nulla aliquam sodales vel at ligula. Sed blandit diam odio, sed
+					fringilla lectus molestie sit amet. Praesent eu tortor viverra lorem mattis pulvinar feugiat in
+					turpis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+					Fusce ullamcorper tellus sit amet mattis dignissim. Phasellus ut metus ligula. Curabitur nec leo
+					turpis. Ut gravida purus quis erat pretium, sed pellentesque massa elementum. Fusce vestibulum porta
+					augue, at mattis justo. Integer sed sapien fringilla, dapibus risus id, faucibus ante. Pellentesque
+					mattis nunc sit amet tortor pellentesque, non placerat neque viverra. </p>
+				<footer>
+					<ul class="stats">
+						<li><a href="#">General</a></li>
+						<li><a href="#" class="icon solid fa-heart">28</a></li>
+						<li><a href="#" class="icon solid fa-comment">128</a></li>
+					</ul>
+				</footer>
+			</article>
+		</div>
+		<!-- Footer -->
+		<section id="footer">
+			<ul class="icons">
+				<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+				<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+				<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+				<li><a href="#" class="icon solid fa-rss"><span class="label">RSS</span></a></li>
+				<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+			</ul>
+			<p class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a
+					href="http://unsplash.com">Unsplash</a>.</p>
+		</section>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
